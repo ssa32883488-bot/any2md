@@ -3,6 +3,37 @@
 
 $ErrorActionPreference = "Stop"
 $Root = $PSScriptRoot
+
+function Resolve-BuildPython {
+    $candidates = @()
+    if ($env:ANY2MD_PYTHON) { $candidates += $env:ANY2MD_PYTHON }
+    $candidates += @(
+        "F:\Python\Python 3.13.0\python.exe",
+        "F:\Python\Python312\python.exe",
+        "F:\Python\Python311\python.exe"
+    )
+    foreach ($p in $candidates) {
+        if ($p -and (Test-Path $p)) { return $p }
+    }
+    foreach ($ver in @("3.13", "3.12", "3.11")) {
+        try {
+            $py = (& py "-$ver" -c "import sys; print(sys.executable)" 2>$null | Select-Object -Last 1)
+            if ($py -and (Test-Path $py)) { return $py.Trim() }
+        } catch { }
+    }
+    foreach ($name in @("python", "python3")) {
+        $cmd = Get-Command $name -ErrorAction SilentlyContinue
+        if (-not $cmd) { continue }
+        $p = $cmd.Source
+        if ($p -match "WindowsApps") { continue }
+        try {
+            & $p -c "import sys" 2>$null | Out-Null
+            if ($LASTEXITCODE -eq 0) { return $p }
+        } catch { }
+    }
+    throw "No usable Python found. Install Python 3.11+ or set ANY2MD_PYTHON to python.exe path."
+}
+
 $EngineSrc = Join-Path (Split-Path $Root -Parent) "engine"
 $Bundle = Join-Path $Root "_bundle\engine"
 $CollectName = "any2md_stage"
@@ -43,10 +74,8 @@ if (Test-Path (Split-Path $Bundle -Parent)) {
 New-Item -ItemType Directory -Force -Path $Bundle | Out-Null
 Copy-Item -Path (Join-Path $EngineSrc "*") -Destination $Bundle -Recurse -Force
 
-$Python = "python"
-if ($env:ANY2MD_PYTHON -and (Test-Path $env:ANY2MD_PYTHON)) {
-    $Python = $env:ANY2MD_PYTHON
-}
+$Python = Resolve-BuildPython
+Write-Host "Python: $Python" -ForegroundColor Cyan
 
 Write-Host "== Install build deps ==" -ForegroundColor Cyan
 & $Python -m pip install -q -r requirements-build.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
