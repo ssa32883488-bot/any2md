@@ -1,0 +1,77 @@
+{
+  "generated_at": "2026-06-08T17:13:05",
+  "purpose": "any2md 压力测试集：多栏、多版面、多层级",
+  "files": [
+    {
+      "id": "01_multilevel_sections",
+      "docx": "testset\\office\\01_multilevel_sections.docx",
+      "pdf_office": "testset\\office\\01_multilevel_sections.pdf",
+      "pdf_digital": "testset\\digital\\01_multilevel_sections.pdf",
+      "pdf_source": "Word.Application",
+      "route_hint": {
+        "docx": "text (CPU fast)",
+        "pdf_office": "text if digital / ocr if scanned",
+        "pdf_digital": "text (CPU fast)"
+      },
+      "scan_target": "testset\\scan\\01_multilevel_sections_scan.pdf"
+    },
+    {
+      "id": "02_two_column",
+      "docx": "testset\\office\\02_two_column.docx",
+      "pdf_office": "testset\\office\\02_two_column.pdf",
+      "pdf_digital": "testset\\digital\\02_two_column.pdf",
+      "pdf_source": "Kwps.Application",
+      "route_hint": {
+        "docx": "text (CPU fast)",
+        "pdf_office": "text if digital / ocr if scanned",
+        "pdf_digital": "text (CPU fast)"
+      },
+      "scan_target": "testset\\scan\\02_two_column_scan.pdf"
+    },
+    {
+      "id": "03_three_column",
+      "docx": "testset\\office\\03_three_column.docx",
+      "pdf_office": "testset\\office\\03_three_column.pdf",
+      "pdf_digital": "testset\\digital\\03_three_column.pdf",
+      "pdf_source": "Word.Application",
+      "route_hint": {
+        "docx": "text (CPU fast)",
+        "pdf_office": "text if digital / ocr if scanned",
+        "pdf_digital": "text (CPU fast)"
+      },
+      "scan_target": "testset\\scan\\03_three_column_scan.pdf"
+    },
+    {
+      "id": "04_layout_table_body",
+      "docx": "testset\\office\\04_layout_table_body.docx",
+      "pdf_office": "testset\\office\\04_layout_table_body.pdf",
+      "pdf_digital": "testset\\digital\\04_layout_table_body.pdf",
+      "pdf_source": "Kwps.Application",
+      "route_hint": {
+        "docx": "text (CPU fast)",
+        "pdf_office": "text if digital / ocr if scanned",
+        "pdf_digital": "text (CPU fast)"
+      },
+      "scan_target": "testset\\scan\\04_layout_table_body_scan.pdf"
+    },
+    {
+      "id": "05_mixed_stress",
+      "docx": "testset\\office\\05_mixed_stress.docx",
+      "pdf_office": "testset\\office\\05_mixed_stress.pdf",
+      "pdf_digital": "testset\\digital\\05_mixed_stress.pdf",
+      "pdf_source": "Word.Application",
+      "route_hint": {
+        "docx": "text (CPU fast)",
+        "pdf_office": "text if digital / ocr if scanned",
+        "pdf_digital": "text (CPU fast)"
+      },
+      "scan_target": "testset\\scan\\05_mixed_stress_scan.pdf"
+    },
+    {
+      "id": "06_excel_tables",
+      "xlsx": "testset\\office\\06_excel_tables.xlsx",
+      "route_hint": "text (CPU fast)"
+    }
+  ],
+  "scan_instructions": "打开 digital/*.pdf 或 office/*.pdf，使用 Win+Shift+S 或扫描仪逐页截图，合并为 scan/*.pdf，用于 OCR 路径测试。"
+}

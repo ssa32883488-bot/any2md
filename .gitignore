@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv*/
+.pytest_cache/
+*.log
+
+# Build / bundle
+gui/_bundle/
+gui/build/
+gui/dist/
+dist/
+build/
+
+# Runtime data (download locally, do not commit)
+models/
+output/
+gui/config.json
+
+# Paddle / OCR caches
+.paddleocr/
+.paddlex/
+official_models/
+
+# Test artifacts (regenerate with scripts/generate_testset.py)
+testset/output/*
+!testset/output/.gitkeep
+testset/office/*
+!testset/office/.gitkeep
+testset/digital/*
+!testset/digital/.gitkeep
+testset/scan/*.pdf
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

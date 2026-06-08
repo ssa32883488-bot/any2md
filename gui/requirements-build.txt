@@ -1,0 +1,3 @@
+# Build-time only; runtime GUI uses tkinter (stdlib).
+pyinstaller>=6.0
+requests>=2.31
